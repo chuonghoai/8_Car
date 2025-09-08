@@ -31,7 +31,7 @@ class eight_queen:
         self.pos_random = [_[i*self.n:(i+1)*self.n] for i in range(self.n)]
 
         #Đặt xe vào ma trận với các tọa độ từ node
-        node = self.set_xa_DFS()
+        node = self.set_xa_BFS()
         self.pos_xa = [[0] * self.n for _ in range(self.n)]
         for x, y in node:
             self.pos_xa[x][y] = 1
@@ -61,8 +61,8 @@ class eight_queen:
         
         return buttons
     
-    #Hàm đặt xe bằng DFS
-    def set_xa_DFS(self):
+    #Hàm đặt xe bằng BFS
+    def set_xa_BFS(self):
         #Stack và các biến ban đầu
         frontier = deque([])    #stack
         xst, yst = self.pos_random[0][0][0], self.pos_random[0][0][1]
