@@ -12,10 +12,10 @@ class eight_queen:
         self.n = 8
 
         self.frame_left = tk.Frame(self.root, bg="lightgray", relief="solid", borderwidth=1)
-        self.frame_left.grid(row=0, column=0, padx=10, pady=10)
+        self.frame_left.grid(row=0, column=0, padx=10, pady=5)
 
         self.frame_right = tk.Frame(self.root, bg="lightgray", relief="solid", borderwidth=1)
-        self.frame_right.grid(row=0, column=1, padx=10, pady=10)
+        self.frame_right.grid(row=0, column=1, padx=10, pady=5)
 
         white_xa = Image.open("./whiteX.png").resize((60, 60))
         black_xa = Image.open("./blackX.png").resize((60, 60))
@@ -30,11 +30,15 @@ class eight_queen:
         random.shuffle(_)
         self.pos_random = [_[i*self.n:(i+1)*self.n] for i in range(self.n)]
 
-        #Đặt xe vào ma tận với các tọa độ từ node
+        #Đặt xe vào ma trận với các tọa độ từ node
         node = self.set_xa_DFS()
         self.pos_xa = [[0] * self.n for _ in range(self.n)]
         for x, y in node:
             self.pos_xa[x][y] = 1
+
+        cost = self.cost_cal(node)
+        cost_txt = tk.Label(self.root, bg="lightgray", text=f"Chi phí: {cost}", font=("Arial", 15))
+        cost_txt.grid(row=1, column=0, columnspan=2, pady=5)
         
         #Vẽ lên giao diện
         self.buttons_left = self.create_widget(self.frame_left, False)
@@ -109,6 +113,20 @@ class eight_queen:
         child = copy.deepcopy(node)
         child.append((x, y))
         return child  
+
+    #Chi phí = các ô đã bị hạn chế = tổng số ô - số ô trống    
+    def cost_cal(self, node):
+        row = {x for (x, _) in node}
+        col = {y for (_, y) in node}
+
+        free_pos = 0
+        for i in range(self.n):
+            if i not in row:
+                for j in range(self.n):
+                    if j not in col:
+                        free_pos += 1
+
+        return self.n * self.n - free_pos
     
 if __name__ == "__main__":
     root = tk.Tk()
