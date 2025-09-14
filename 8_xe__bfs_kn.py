@@ -17,7 +17,7 @@ class eight_rooks:
         frame_right.grid(row=0, column=1, padx=10, pady=10)
 
         self.buttons_l = self.create_widget(frame_left, False)
-        self.bfs(random.randint(0, 7), random.randint(0, 7))
+        self.bfs(random.randint(0, 7), random.randint(0, 7))        #Nên thay 7 bằng self.n, để dễ kiểm tra hơn mỗi khi thay đổi n
         self.buttons_r = self.create_widget(frame_right, True)
 
     def create_widget(self, frame, show_rook):
