@@ -9,7 +9,7 @@ class eight_queen:
         self.root = root
         self.root.title("8 queen")
         self.root.config(bg="lightgray")
-        self.n = 8
+        self.n = 4
 
         self.frame_left = tk.Frame(self.root, bg="lightgray", relief="solid", borderwidth=1)
         self.frame_left.grid(row=0, column=0, padx=10, pady=10)
@@ -64,7 +64,7 @@ class eight_queen:
     #Hàm đặt xe bằng BFS
     def set_xa_BFS(self):
         #Stack và các biến ban đầu
-        frontier = deque([])    #stack
+        frontier = deque([])
         xst, yst = self.pos_random[0][0][0], self.pos_random[0][0][1]
         node = [(xst, yst)]
         if self.check_goal(node):
